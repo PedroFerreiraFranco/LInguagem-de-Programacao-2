@@ -11,9 +11,11 @@ package casa;
  */
 public class Casa {
     private String cor;
-    private boolean porta1 = false;
-    private boolean porta2 = false;
-    private boolean porta3 = false;
+    Porta p1 = new Porta();
+    Porta p2 = new Porta();
+    Porta p3 = new Porta();
+    int qtd=0;
+
 
     public String getCor() {
         return cor;
@@ -22,30 +24,23 @@ public class Casa {
     public void setCor(String cor) {
         this.cor = cor;
     }
-
-    public boolean isPorta1() {
-        return porta1;
-    }
-
-    public void setPorta1(boolean porta1) {
-        this.porta1 = porta1;
-    }
-
-    public boolean isPorta2() {
-        return porta2;
-    }
-
-    public void setPorta2(boolean porta2) {
-        this.porta2 = porta2;
-    }
-
-    public boolean isPorta3() {
-        return porta3;
-    }
-
-    public void setPorta3(boolean porta3) {
-        this.porta3 = porta3;
+    
+    public int quantasPortasEstaoAbertas(){
+        if(p1.isAberta()){
+            qtd++;
+        }
+        if(p2.isAberta()){
+            qtd++;
+        }
+        if(p3.isAberta()){
+            qtd++;
+        }
+        return qtd;
     }
     
+    public void mudaCor(String corDesejada){
+        setCor(corDesejada);
+    }
+
     
 }
