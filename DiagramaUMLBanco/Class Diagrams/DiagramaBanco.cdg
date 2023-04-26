@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="DiagramaBanco">
+  <ClassDiagramComponents>
+    <Class name="Funcionario" package="" visibility="public" isAbstract="true" xPosition="192.0" yPosition="130.0">
+      <Fields>
+        <Field name="nome" type="String" visibility="private"/>
+        <Field name="untitledField" type="Object" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="bonifica" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Gerente" package="" visibility="public" xPosition="80.0" yPosition="418.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Interface name="UntitledInterface" package="" visibility="public" xPosition="639.0" yPosition="129.0">
+      <Methods/>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <IsRelation name="is" source="Gerente" target="Funcionario"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

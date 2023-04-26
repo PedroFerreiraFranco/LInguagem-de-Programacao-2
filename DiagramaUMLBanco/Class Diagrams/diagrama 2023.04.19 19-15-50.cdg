@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="diagrama">
+  <ClassDiagramComponents>
+    <Class name="Cliente" package="diagrama" visibility="public" xPosition="384.0" yPosition="595.0">
+      <Fields>
+        <Field name="nome" type="String" visibility="private"/>
+        <Field name="nascimento" type="Data" visibility="package"/>
+        <Field name="end" type="Endereco" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nome"/>
+          <Argument type="String" name="senha"/>
+          <Argument type="int" name="dia"/>
+          <Argument type="int" name="mes"/>
+          <Argument type="int" name="ano"/>
+          <Argument type="String" name="rua"/>
+          <Argument type="String" name="bairro"/>
+          <Argument type="int" name="numero"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNome" returnType="String" visibility="public"/>
+        <Method name="setNome" returnType="void" visibility="public">
+          <Argument type="String" name="nome"/>
+        </Method>
+        <Method name="getSenha" returnType="String" visibility="public"/>
+        <Method name="setSenha" returnType="void" visibility="public">
+          <Argument type="String" name="senha"/>
+        </Method>
+        <Method name="mostraDados" returnType="void" visibility="public"/>
+        <Method name="autentica" returnType="void" visibility="public">
+          <Argument type="String" name="senha"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Data" package="diagrama" visibility="public" xPosition="678.0" yPosition="40.0">
+      <Fields>
+        <Field name="dia" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getDia" returnType="int" visibility="public"/>
+        <Method name="setDia" returnType="void" visibility="public">
+          <Argument type="int" name="dia"/>
+        </Method>
+        <Method name="getMes" returnType="int" visibility="public"/>
+        <Method name="setMes" returnType="void" visibility="public">
+          <Argument type="int" name="mes"/>
+        </Method>
+        <Method name="getAno" returnType="int" visibility="public"/>
+        <Method name="setAno" returnType="void" visibility="public">
+          <Argument type="int" name="ano"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Diretor" package="diagrama" visibility="public" xPosition="732.0" yPosition="315.0">
+      <Fields>
+        <Field name="senha" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nome"/>
+          <Argument type="int" name="dia"/>
+          <Argument type="int" name="mes"/>
+          <Argument type="int" name="ano"/>
+          <Argument type="String" name="rua"/>
+          <Argument type="String" name="bairro"/>
+          <Argument type="int" name="numero"/>
+          <Argument type="String" name="senha"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getSenha" returnType="String" visibility="public"/>
+        <Method name="setSenha" returnType="void" visibility="public">
+          <Argument type="String" name="senha"/>
+        </Method>
+        <Method name="mostraDados" returnType="void" visibility="public"/>
+        <Method name="autentica" returnType="void" visibility="public">
+          <Argument type="String" name="senha"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Endereco" package="diagrama" visibility="public" xPosition="342.0" yPosition="118.0">
+      <Fields>
+        <Field name="rua" type="String" visibility="private"/>
+        <Field name="numero" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getRua" returnType="String" visibility="public"/>
+        <Method name="setRua" returnType="void" visibility="public">
+          <Argument type="String" name="rua"/>
+        </Method>
+        <Method name="getBairro" returnType="String" visibility="public"/>
+        <Method name="setBairro" returnType="void" visibility="public">
+          <Argument type="String" name="bairro"/>
+        </Method>
+        <Method name="getNumero" returnType="int" visibility="public"/>
+        <Method name="setNumero" returnType="void" visibility="public">
+          <Argument type="int" name="numero"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Engenheiro" package="diagrama" visibility="public" xPosition="1314.0" yPosition="353.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nome"/>
+          <Argument type="int" name="dia"/>
+          <Argument type="int" name="mes"/>
+          <Argument type="int" name="ano"/>
+          <Argument type="String" name="rua"/>
+          <Argument type="String" name="bairro"/>
+          <Argument type="int" name="numero"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="mostraDados" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Funcionario" package="diagrama" visibility="public" isAbstract="true" xPosition="1049.0" yPosition="34.0">
+      <Fields>
+        <Field name="nome" type="String" visibility="protected"/>
+        <Field name="end" type="Endereco" visibility="package"/>
+        <Field name="nascimento" type="Data" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nome"/>
+          <Argument type="int" name="dia"/>
+          <Argument type="int" name="mes"/>
+          <Argument type="int" name="ano"/>
+          <Argument type="String" name="rua"/>
+          <Argument type="String" name="bairro"/>
+          <Argument type="int" name="numero"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Gerente" package="diagrama" visibility="public" xPosition="1989.0" yPosition="296.0">
+      <Fields>
+        <Field name="senha" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nome"/>
+          <Argument type="int" name="dia"/>
+          <Argument type="int" name="mes"/>
+          <Argument type="int" name="ano"/>
+          <Argument type="String" name="rua"/>
+          <Argument type="String" name="bairro"/>
+          <Argument type="int" name="numero"/>
+          <Argument type="String" name="senha"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getSenha" returnType="String" visibility="public"/>
+        <Method name="setSenha" returnType="void" visibility="public">
+          <Argument type="String" name="senha"/>
+        </Method>
+        <Method name="mostraDados" returnType="void" visibility="public"/>
+        <Method name="autentica" returnType="void" visibility="public">
+          <Argument type="String" name="senha"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="SistemaInterno" package="diagrama" visibility="public" xPosition="1917.0" yPosition="892.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="login" returnType="void" visibility="public">
+          <Argument type="Autenticavel" name="a"/>
+          <Argument type="String" name="senha"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Teste" package="diagrama" visibility="public" xPosition="702.0" yPosition="881.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="Autenticavel" package="diagrama" visibility="public" xPosition="1946.0" yPosition="734.0">
+      <Methods>
+        <Method name="autentica" returnType="void" visibility="public">
+          <Argument type="String" name="senha"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="Utilitario" package="diagrama" visibility="public" xPosition="1234.0" yPosition="853.0">
+      <Methods>
+        <Method name="mostraDados" returnType="void" visibility="public"/>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="diagrama.SistemaInterno" target="diagrama.Autenticavel" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="diagrama.Gerente" target="diagrama.Utilitario"/>
+    <IsRelation name="is" source="diagrama.Gerente" target="diagrama.Funcionario"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="diagrama.Cliente" target="diagrama.Utilitario"/>
+    <HasRelation name="nascimento" source="diagrama.Cliente" target="diagrama.Data" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="end" source="diagrama.Funcionario" target="diagrama.Endereco" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="diagrama.Diretor" target="diagrama.Utilitario"/>
+    <IsRelation name="is" source="diagrama.Diretor" target="diagrama.Funcionario"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="diagrama.Gerente" target="diagrama.Autenticavel"/>
+    <HasRelation name="end" source="diagrama.Cliente" target="diagrama.Endereco" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="nascimento" source="diagrama.Funcionario" target="diagrama.Data" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="diagrama.Engenheiro" target="diagrama.Funcionario"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="diagrama.Engenheiro" target="diagrama.Utilitario"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="diagrama.Cliente" target="diagrama.Autenticavel"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="diagrama.Diretor" target="diagrama.Autenticavel"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
