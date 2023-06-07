@@ -107,8 +107,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     private void menuFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFuncionarioActionPerformed
         // TODO add your handling code here:
-        // TODO add your handling code here:
-        FormFuncionario form  = new FormFuncionario(this,true);
+         FormFuncionario form  = new FormFuncionario(this,true);
         //this: chama a partir deste form
         // true: Modal: sobre o form principal e não deixa acessa-lo
         form.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);

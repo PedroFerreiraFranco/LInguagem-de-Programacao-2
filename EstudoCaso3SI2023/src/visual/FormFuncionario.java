@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package visual;
 
-import  java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.Cidade;
 import modelo.DAOCidade;
@@ -18,10 +18,13 @@ import modelo.DAOFuncionario;
  * @author tulio
  */
 public class FormFuncionario extends javax.swing.JDialog {
+
     DAOFuncionario objDAOFuncionario = new DAOFuncionario();
     DAOCidade objDAOCidade = new DAOCidade();
 
-    /** Creates new form FormCidade */
+    /**
+     * Creates new form FormCidade
+     */
     public FormFuncionario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -30,30 +33,30 @@ public class FormFuncionario extends javax.swing.JDialog {
         listCidade.clear();
         listCidade.addAll(objDAOCidade.getLista());
     }
-    
-    public void atualizaTabela(){
+
+    public void atualizaTabela() {
         listFuncionario.clear();
         listFuncionario.addAll(objDAOFuncionario.getLista());
-        int linha = listFuncionario.size()-1;
-        if(linha>=0){
+        int linha = listFuncionario.size() - 1;
+        if (linha >= 0) {
             tblFuncionario.setRowSelectionInterval(linha, linha);
-      tblFuncionario.scrollRectToVisible(tblFuncionario.getCellRect(linha,linha,true));
+            tblFuncionario.scrollRectToVisible(tblFuncionario.getCellRect(linha, linha, true));
         }
     }
-    
-    private void trataEdicao(boolean editando){
+
+    private void trataEdicao(boolean editando) {
         btnCancelar.setEnabled(editando);
         btnSalvar.setEnabled(editando);
         btnEditar.setEnabled(!editando);
-        int linha = listFuncionario.size()-1;
-        if(linha<0){
+        int linha = listFuncionario.size() - 1;
+        if (linha < 0) {
             btnEditar.setEnabled(false);
             btnExcluir.setEnabled(false);
             txtCodigo.setText("");
             txtNome.setText("");
             txtNascimento.setText("");
             txtSalario.setText("");
-        }else{
+        } else {
             btnExcluir.setEnabled(!editando);
         }
         btnNovo.setEnabled(!editando);
@@ -62,45 +65,60 @@ public class FormFuncionario extends javax.swing.JDialog {
         btnProximo.setEnabled(!editando);
         btnAnterior.setEnabled(!editando);
         btnUltimo.setEnabled(!editando);
-        
-        cbxCidade.setEnabled(editando);
-        
-        txtNome.setEnabled(editando);     
+        txtNome.setEnabled(editando);
         txtNascimento.setEnabled(editando);
         txtSalario.setEnabled(editando);
-        
+        cbxCidade.setEnabled(editando);
         tblFuncionario.setEnabled(editando);
-        
+
     }
-    
-    public boolean validaCampos(){
-        if(!(txtNome.getText().length()>0)){
+
+    public boolean validaCampos() {
+        if (!(txtNome.getText().length() > 0)) {
             JOptionPane.showMessageDialog(null, "Informe o nome da Cidade");
             txtNome.requestFocus();
             return false;
         }
-        if(!(cbxCidade.getSelectedIndex()>=0)){
-            JOptionPane.showMessageDialog(null, "Selecione uma UF");
-            cbxCidade.requestFocus();
-            return false; 
+
+        if (txtNascimento.getText().length() > 0) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            sdf.setLenient(false);
+            try {
+                sdf.parse(txtNascimento.getText());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Informe a data de nascimento");
+                txtNascimento.requestFocus();
+                return false;
+            }
+
         }
-        if(!(txtNascimento.getText().length()>0)){
-            JOptionPane.showMessageDialog(null, "Informe a Data de Nascimento");
-            txtNascimento.requestFocus();
-            return false;
-        }
-        if(!(txtSalario.getText().length()>0)){
-            JOptionPane.showMessageDialog(null, "Informe o Salário");
+        if (!(txtSalario.getText().length() > 0)) {
+            JOptionPane.showMessageDialog(null, "Informe o valor do salário");
             txtSalario.requestFocus();
             return false;
-        }        
+        }
+        if (txtSalario.getText().length() > 0) {
+            try {
+                Double.parseDouble(txtSalario.getText());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog
+                 (null, "Informe somente números para o valor do salário");
+                txtSalario.requestFocus();
+                return false;
+            }
+        }
+        if (!(cbxCidade.getSelectedIndex() >= 0)) {
+            JOptionPane.showMessageDialog(null, "Selecione uma UF");
+            cbxCidade.requestFocus();
+            return false;
+        }
         return true;
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -137,17 +155,17 @@ public class FormFuncionario extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         txtSalario = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        javax.swing.text.MaskFormatter maskData=null;
+        javax.swing.text.MaskFormatter maskData = null;
         try{
             maskData = new javax.swing.text.MaskFormatter("##/##/####");
             maskData.setPlaceholderCharacter('_');
         }catch(Exception e){
-            System.out.println("Erro na mascara: "+e);
+            System.out.println("Erro na mascara"+e);
         }
         txtNascimento = new javax.swing.JFormattedTextField(maskData);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Funcionários");
+        setTitle("Cadastro de Funcionário");
 
         painelNavegacao.setBorder(javax.swing.BorderFactory.createTitledBorder("Navegação"));
         painelNavegacao.setLayout(new java.awt.GridLayout(1, 0));
@@ -196,29 +214,34 @@ public class FormFuncionario extends javax.swing.JDialog {
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listFuncionario, tblFuncionario);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${codigoFuncionario}"));
-        columnBinding.setColumnName("Codigo Funcionario");
+        columnBinding.setColumnName("Código");
         columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeFuncionario}"));
-        columnBinding.setColumnName("Nome Funcionario");
+        columnBinding.setColumnName("Nome");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nascimentoFormatado}"));
-        columnBinding.setColumnName("Nascimento Formatado");
-        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${objCidade}"));
-        columnBinding.setColumnName("Obj Cidade");
+        columnBinding.setColumnName("Cidade");
         columnBinding.setColumnClass(modelo.Cidade.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${salarioFuncionario}"));
-        columnBinding.setColumnName("Salario Funcionario");
+        columnBinding.setColumnName("Salário");
         columnBinding.setColumnClass(Double.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nascimentoFormatado}"));
+        columnBinding.setColumnName("Nascimento");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(tblFuncionario);
 
-        abaListagem.add(jScrollPane1, java.awt.BorderLayout.PAGE_START);
+        abaListagem.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         painelAbas.addTab("Listagem", abaListagem);
 
-        jLabel1.setText("Código");
+        jLabel1.setText("Còdigo");
 
         jLabel2.setText("Nome:");
 
@@ -319,23 +342,28 @@ public class FormFuncionario extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(painelAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE))
                     .addGroup(abaDadosLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(abaDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cbxCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addGroup(abaDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
                             .addGroup(abaDadosLayout.createSequentialGroup()
+                                .addGap(1, 1, 1)
                                 .addGroup(abaDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1))
-                                .addGap(10, 10, 10)
-                                .addGroup(abaDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                                    .addComponent(txtCodigo)
-                                    .addComponent(txtSalario))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(jLabel5)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, abaDadosLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(33, 33, 33)))
+                        .addGap(33, 33, 33)
+                        .addGroup(abaDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(abaDadosLayout.createSequentialGroup()
+                                .addGroup(abaDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbxCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         abaDadosLayout.setVerticalGroup(
@@ -355,15 +383,15 @@ public class FormFuncionario extends javax.swing.JDialog {
                 .addGroup(abaDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(abaDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(abaDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cbxCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(110, Short.MAX_VALUE))
+                    .addComponent(cbxCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(93, 93, 93))
         );
 
         painelAbas.addTab("Dados", abaDados);
@@ -378,9 +406,8 @@ public class FormFuncionario extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(painelNavegacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(painelAbas, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -398,7 +425,7 @@ public class FormFuncionario extends javax.swing.JDialog {
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         // TODO add your handling code here:
         dispose(); // fecha a janela
-        
+
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
@@ -408,22 +435,22 @@ public class FormFuncionario extends javax.swing.JDialog {
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         // TODO add your handling code here:
         trataEdicao(true);
-        listFuncionario.add((Funcionario)new Funcionario());// cria um objeto e uma linha na tabela
-        int linha = listFuncionario.size()-1;
+        listFuncionario.add((Funcionario) new Funcionario());// cria um objeto e uma linha na tabela
+        int linha = listFuncionario.size() - 1;
         tblFuncionario.setRowSelectionInterval(linha, linha);// seleciona a linha
         txtNome.requestFocus();// caixa texto nome recebe o foco
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-        if(validaCampos()){
-        trataEdicao(false);
-        int linhaSelecionada = tblFuncionario.getSelectedRow();
-        Funcionario objFuncionario = listFuncionario.get(linhaSelecionada);
-        objDAOFuncionario.salvar(objFuncionario);
-        atualizaTabela();
+        if (validaCampos()) {
+            trataEdicao(false);
+            int linhaSelecionada = tblFuncionario.getSelectedRow();
+            Funcionario objFuncionario = listFuncionario.get(linhaSelecionada);
+            objDAOFuncionario.salvar(objFuncionario);
+            atualizaTabela();
         }
-        
+
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -440,33 +467,33 @@ public class FormFuncionario extends javax.swing.JDialog {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-        int opcao= JOptionPane.showOptionDialog(null, "Confirmar exclusão?",
-        "Pergunta",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, 
-        null,new String[]{"Sim","Não"},"Sim");
-        if(opcao==0){
-          int linhaSelecionada = tblFuncionario.getSelectedRow();
-          Funcionario objFuncionario = listFuncionario.get(linhaSelecionada);
-          objDAOFuncionario.remover(objFuncionario);
-          atualizaTabela();
-          trataEdicao(false);
+        int opcao = JOptionPane.showOptionDialog(null, "Confirmar exclusão?",
+                "Pergunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                null, new String[]{"Sim", "Não"}, "Sim");
+        if (opcao == 0) {
+            int linhaSelecionada = tblFuncionario.getSelectedRow();
+            Funcionario objFuncionario = listFuncionario.get(linhaSelecionada);
+            objDAOFuncionario.remover(objFuncionario);
+            atualizaTabela();
+            trataEdicao(false);
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
         // TODO add your handling code here:
         int linha = tblFuncionario.getSelectedRow();
-        if((linha-1)>=0){
+        if ((linha - 1) >= 0) {
             linha--;
         }
         tblFuncionario.setRowSelectionInterval(linha, linha);
         tblFuncionario.scrollRectToVisible(tblFuncionario.getCellRect(linha, 0, true));
-        
+
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
         // TODO add your handling code here:
-       int linha = tblFuncionario.getSelectedRow();
-        if((linha+1)<=(tblFuncionario.getRowCount())-1){
+        int linha = tblFuncionario.getSelectedRow();
+        if ((linha + 1) <= (tblFuncionario.getRowCount()) - 1) {
             linha++;
         }
         tblFuncionario.setRowSelectionInterval(linha, linha);
@@ -475,10 +502,10 @@ public class FormFuncionario extends javax.swing.JDialog {
 
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
         // TODO add your handling code here:
-        int linha = tblFuncionario.getRowCount()-1;
+        int linha = tblFuncionario.getRowCount() - 1;
         tblFuncionario.setRowSelectionInterval(linha, linha);
         tblFuncionario.scrollRectToVisible(tblFuncionario.getCellRect(linha, 0, true));
-  
+
     }//GEN-LAST:event_btnUltimoActionPerformed
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
@@ -489,7 +516,6 @@ public class FormFuncionario extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxCidadeActionPerformed
 
-    
     /**
      * @param args the command line arguments
      */

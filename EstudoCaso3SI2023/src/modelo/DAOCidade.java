@@ -5,7 +5,12 @@
  */
 package modelo;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,7 +19,22 @@ import java.util.List;
 public class DAOCidade { // Data Acess Object
    
     public List<Cidade> getLista(){
-        return Dados.listaCidade;
+        String sql = "select = from cidade";
+        List<Cidade> ListaCidade = new ArrayList<>();
+        try{
+            PreparedStatement pst = Conexao.getPreparedStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                Cidade objeCidade = new Cidade();
+                objeCidade.setCodigoCidade(rs.getInt("codCidade"));
+                objeCidade.setNomeCidade(rs.getString("nome"));
+                objeCidade.setUfCidade(rs.getString("uf"));
+                ListaCidade.add(objeCidade);
+            }
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"Erro de SQL: "+ex.getMessage());
+        }
+        return ListaCidade;
     }
     
     public boolean salvar(Cidade obj){
